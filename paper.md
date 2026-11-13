@@ -45,48 +45,70 @@ The **AudioIntegrity Suite** uniquely addresses audio dataset engineering by pro
 2. **Cross-Partition Security:** Acoustic fingerprinting tailored specifically to identify train/validation/test contamination across re-encoded or trimmed segments.
 3. **Autonomous Quarantining:** Production-grade CLI tools and Python hooks that output machine-readable JSON/CSV audit reports for automated data filtering in PyTorch and Hugging Face data loaders.
 
-# Architecture & Tool Suite
+# Architecture & Tool Suite: 3-Stage ML Dataset Curation
 
-The suite comprises 10 specialized open-source tools distributed via the Python Package Index (PyPI):
+The suite organizes 10 specialized Python packages across three critical lifecycle stages of audio machine learning engineering:
 
-| Tool | Core Module Functionality | Output Metrics |
-| :--- | :--- | :--- |
-| **`bandcheck`** | Modified Discrete Cosine Transform (MDCT) spectral cutoff forensics | Cutoff frequency ($f_c$), upsampling ratio |
-| **`phasecheck`** | Inter-channel cross-correlation & Haas delay estimation | Correlation coefficient ($\rho$), mono downmix cancellation loss ($\text{dB}$) |
-| **`splitsafe`** | Acoustic fingerprinting and cross-split duplicate detection | Match confidence, alignment overlap ratio |
-| **`driftcheck`** | Time-activity alignment and asynchronous clock drift tracking | Clock drift rate ($\text{ppm}$), onset delay offset |
-| **`stemcheck`** | Multi-track Wiener soft-mask leakage estimation | Inter-stem bleed index ($\text{dB}$), HPSS isolation ratio |
-| **`wavewash`** | Waveform quality control and DC bias repair | Clipping percentage, DC offset, SNR |
-| **`tempocheck`** | Dynamic BPM trajectory and downbeat grid verification | BPM consistency score, tempo transition points |
-| **`tonicfind`** | 12-dimensional chroma correlation and key label validation | Harmonic profile score, MIREX key relation |
-| **`turnscope`** | Conversational voice activity detection and overlap analysis | Speaker overlap ratio, response latency |
-| **`mixforge`** | Controlled multi-track mixture synthesis with calibrated bleed | Ground-truth acoustic mixes and RIR stems |
+### Stage 1: Pre-Ingestion Signal Hygiene & Forensics
+* **`bandcheck` (Spectral Forensics):** Detects brickwall lossy compression cutoffs and fake 48 kHz upsampling via Modified Discrete Cosine Transform (MDCT) frame statistics. *ML Usage:* Automatically drops or flags web-scraped audio to prevent generative and diffusion models from hallucinating high-frequency codec hiss.
+* **`phasecheck` (Spatial & Phase Integrity):** Quantifies inter-channel cross-correlation ($\rho$), sub-sample Haas delay, and mono downmix cancellation loss in dB. *ML Usage:* Quarantines polarity-inverted stereo files before feature extraction to prevent destructive phase cancellation when PyTorch models downmix to mono.
+* **`wavewash` (Waveform Quality Control):** Scans for hard clipping, digital saturation, DC offset bias, and dynamic SNR. *ML Usage:* Pre-conditions raw waveforms with automated DC-bias centering and headroom normalization before spectrogram computation.
+* **`driftcheck` (Clock Drift Synchronization):** Tracks asynchronous sample-clock drift rates in parts-per-million ($\text{ppm}$) across independent recording interfaces. *ML Usage:* Aligns multi-microphone speech corpora before multi-channel acoustic modeling.
+
+### Stage 2: Dataset Partition Security & Synthetic Ground Truth
+* **`splitsafe` (Contamination Firewall):** Generates robust acoustic fingerprints to detect cross-partition duplicates across training, validation, and testing directories. *ML Usage:* Identifies bit-exact duplicates, trimmed excerpts, and re-encoded copies across splits, ensuring reported test accuracy reflects true generalization.
+* **`mixforge` (Benchmark Synthesis Engine):** Mixes multi-track stems with calibrated inter-channel acoustic bleed and simulated Room Impulse Responses (RIRs). *ML Usage:* Generates controlled, ground-truth audio mixtures to benchmark source separation and speech enhancement algorithms.
+
+### Stage 3: Annotation Validation & Model Diagnostics
+* **`tempocheck` (Rhythmic Annotation Audit):** Verifies dynamic BPM trajectories and downbeat grid alignment. *ML Usage:* Audits music AI dataset labels, flagging half-time/double-time annotation errors in training manifests.
+* **`tonicfind` (Harmonic Key Validation):** Computes 12-dimensional chromagram correlations against Temperley/Krumhansl tonal profiles. *ML Usage:* Validates musical key and tonality metadata for conditional music generation models.
+* **`turnscope` (Conversational Speech Forensics):** Measures Voice Activity Detection (VAD) boundaries, speaker overlap duration, and turn-taking latency. *ML Usage:* Audits diarization datasets and benchmarks conversational speech synthesis models.
+* **`stemcheck` (Separation Bleed Diagnostics):** Calculates inter-stem Wiener soft-mask bleed and harmonic-percussive separation (HPSS) leakage. *ML Usage:* Evaluates Demucs/Spleeter source separation checkpoints by measuring residual acoustic bleed across separated stems.
+
+| Tool | ML Pipeline Stage | Detection Target & Method | Primary Output Metrics |
+| :--- | :--- | :--- | :--- |
+| **`bandcheck`** | Pre-Ingestion | Lossy cutoffs & fake upsampling (MDCT) | Cutoff frequency ($f_c$), upsampling ratio |
+| **`phasecheck`** | Pre-Ingestion | Polarity inversion & Haas skew (Correlation) | Correlation ($\rho$), mono cancellation loss ($\text{dB}$) |
+| **`wavewash`** | Pre-Ingestion | Peak clipping, DC offset bias, dynamic SNR | Clipping %, DC bias %, SNR ($\text{dB}$) |
+| **`driftcheck`** | Pre-Ingestion | Multi-device asynchronous clock drift | Clock drift rate ($\text{ppm}$), time offset |
+| **`splitsafe`** | Partition Security | Train/Val/Test contamination & leakage | Match confidence, alignment overlap ratio |
+| **`mixforge`** | Synthetic Benchmarking | Calibrated multi-track mixing & RIRs | Ground-truth SDR/SIR/SAR reference mixes |
+| **`tempocheck`** | Annotation Audit | BPM consistency & downbeat grid alignment | BPM consistency score, tempo transitions |
+| **`tonicfind`** | Annotation Audit | 12-dimensional harmonic key profiling | Key label profile score, MIREX relation |
+| **`turnscope`** | Model Evaluation | Conversational speech overlap & latency | Speaker overlap ratio, response latency |
+| **`stemcheck`** | Model Evaluation | Wiener soft-mask source separation bleed | Inter-stem bleed index ($\text{dB}$), HPSS isolation |
 
 # Empirical Benchmark Verification
 
-To evaluate detection power and false-alarm resistance, the suite was benchmarked against a controlled synthetic ground-truth corpus (48 kHz, 34 entries) comprising clean negative controls, steep Chebyshev Type II brickwall cutoffs (8 kHz to 20 kHz), calibrated Haas delays, and injected split leakages.
+While all 10 packages maintain independent automated test suites with over 300 passing unit tests, the core pre-training forensics detectors were evaluated against a calibrated synthetic ground-truth corpus (48 kHz, 34 entries) containing mathematically generated defects and clean acoustic controls:
 
-| Detector | Injected Target | Precision | Recall | Parameter Estimation Error | Clean Negative False-Alarm Rate |
+| Detector | Injected Target Defect | Precision | Recall | Parameter Estimation Error | Clean Negative False-Alarm Rate |
 | :--- | :--- | :---: | :---: | :---: | :---: |
-| **`bandcheck`** | Fake upsampling & cutoffs | **60.0%** | **85.7%** | **$37.7\text{ Hz}$** MAE | **0.0%** (0/10 false alarms) |
+| **`bandcheck`** | Fake upsampling & cutoffs (8–20 kHz) | **60.0%** | **85.7%** | **$37.7\text{ Hz}$** MAE | **0.0%** (0/10 false alarms) |
 | **`phasecheck`** | Polarity inversion / Haas skew | **100.0%** | **50.0%** | $\rho = -1.00$ verified | **0.0%** (0/10 false alarms) |
 | **`splitsafe`** | Train/test split leakage | **100.0%** | **100.0%** | Exact (100%) & trimmed (82%) | **0.0%** false alarms |
 
 Crucially, `bandcheck` successfully differentiated naturally bandwidth-limited acoustic instruments (e.g., double bass rolling off above 4 kHz) from artificial brickwall codec cutoffs, producing **zero false alarms** on clean recordings. `splitsafe` detected both bit-exact duplicates and trimmed/gain-modified duplicates across training and testing partitions.
 
-# Installation and Usage
+# Installation and Practical ML Usage
 
-All tools are installable individually via `pip` or executable as unified CLI utilities:
+All 10 tools are installable individually via `pip` or executable as unified CLI utilities:
 
 ```bash
 # Install individual tools from PyPI
 pip install bandcheck phasecheck splitsafe stemcheck wavewash
 
-# Audit a scraped audio folder before kicking off model training
-bandcheck audit ./scraped_audio/ --output-manifest audit_manifest.json
+# 1. Batch audit a scraped audio folder before launching GPU training
+bandcheck audit ./scraped_corpus/ --output-manifest audit_manifest.json
 
-# Ensure zero train/test leakage before spinning up multi-GPU clusters
-splitsafe check ./train ./test --manifest leakage_audit.csv
+# 2. Prevent multi-GPU data leakage across training and validation partitions
+splitsafe check ./train_set ./val_set --manifest leakage_audit.csv
+
+# 3. Clean waveform anomalies (DC bias, clipping) across audio files
+wavewash clean ./raw_audio/ --output-dir ./cleaned_audio/
+
+# 4. Evaluate source separation models on output stems
+stemcheck audit ./demucs_output_stems/
 ```
 
 Programmatic integration directly into PyTorch data-loading pipelines enables on-the-fly dataset sanitization:
@@ -96,7 +118,8 @@ from pathlib import Path
 import bandcheck.check
 import phasecheck.check
 
-def sanitize_sample(audio_path: Path) -> bool:
+def sanitize_audio_sample(audio_path: Path) -> bool:
+    """Filter corrupted audio files during ML dataset ingestion."""
     # 1. Reject fake-upsampled or lossy-compressed audio
     band_verdict = bandcheck.check.check_file(audio_path)
     if band_verdict.status in ["FAKE", "LIMITED"]:
@@ -105,7 +128,7 @@ def sanitize_sample(audio_path: Path) -> bool:
     # 2. Reject phase-inverted audio before mono downmixing
     phase_verdict = phasecheck.check.check_file(audio_path)
     if phase_verdict.status == "INVERTED":
-        return False  # Prevent cancellation during mono feature extraction
+        return False  # Prevent destructive cancellation during mono feature extraction
         
     return True
 ```
