@@ -1,5 +1,5 @@
 ---
-title: 'ComposerMind AudioIntegrity Suite: A Modular Python Framework for Audio Dataset Quality, Spectral Forensics, and Leakage Detection'
+title: 'ComposerMind AudioIntegrity Suite: A Modular Python Framework for Audio ML Dataset Curation, Spectral Forensics, and Leakage Detection'
 tags:
   - Python
   - audio machine learning

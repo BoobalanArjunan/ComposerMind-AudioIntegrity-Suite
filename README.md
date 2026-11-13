@@ -147,7 +147,7 @@ If you use this suite or its components in your machine learning workflows or re
 
 ```bibtex
 @article{arjunan2026audiointegrity,
-  title={{ComposerMind AudioIntegrity Suite: A Modular Python Framework for Audio Dataset Quality, Spectral Forensics, and Leakage Detection}},
+  title={{ComposerMind AudioIntegrity Suite: A Modular Python Framework for Audio ML Dataset Curation, Spectral Forensics, and Leakage Detection}},
   author={Arjunan, Boobalan},
   journal={Journal of Open Source Software},
   year={2026},
