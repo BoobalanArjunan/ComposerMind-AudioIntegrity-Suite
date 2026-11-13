@@ -1,0 +1,376 @@
+[
+  {
+    "file_id": "clean_00_broadband.wav",
+    "category": "clean",
+    "defect_type": "none",
+    "is_defective": false,
+    "ground_truth": {
+      "bandwidth_limited_naturally": false
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/clean/clean_00_broadband.wav"
+  },
+  {
+    "file_id": "clean_01_broadband.wav",
+    "category": "clean",
+    "defect_type": "none",
+    "is_defective": false,
+    "ground_truth": {
+      "bandwidth_limited_naturally": false
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/clean/clean_01_broadband.wav"
+  },
+  {
+    "file_id": "clean_02_broadband.wav",
+    "category": "clean",
+    "defect_type": "none",
+    "is_defective": false,
+    "ground_truth": {
+      "bandwidth_limited_naturally": false
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/clean/clean_02_broadband.wav"
+  },
+  {
+    "file_id": "clean_03_broadband.wav",
+    "category": "clean",
+    "defect_type": "none",
+    "is_defective": false,
+    "ground_truth": {
+      "bandwidth_limited_naturally": false
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/clean/clean_03_broadband.wav"
+  },
+  {
+    "file_id": "clean_04_broadband.wav",
+    "category": "clean",
+    "defect_type": "none",
+    "is_defective": false,
+    "ground_truth": {
+      "bandwidth_limited_naturally": false
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/clean/clean_04_broadband.wav"
+  },
+  {
+    "file_id": "clean_05_broadband.wav",
+    "category": "clean",
+    "defect_type": "none",
+    "is_defective": false,
+    "ground_truth": {
+      "bandwidth_limited_naturally": false
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/clean/clean_05_broadband.wav"
+  },
+  {
+    "file_id": "clean_06_natural_bandwidth_limited.wav",
+    "category": "clean",
+    "defect_type": "none",
+    "is_defective": false,
+    "ground_truth": {
+      "bandwidth_limited_naturally": true
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/clean/clean_06_natural_bandwidth_limited.wav"
+  },
+  {
+    "file_id": "clean_07_natural_bandwidth_limited.wav",
+    "category": "clean",
+    "defect_type": "none",
+    "is_defective": false,
+    "ground_truth": {
+      "bandwidth_limited_naturally": true
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/clean/clean_07_natural_bandwidth_limited.wav"
+  },
+  {
+    "file_id": "clean_08_natural_bandwidth_limited.wav",
+    "category": "clean",
+    "defect_type": "none",
+    "is_defective": false,
+    "ground_truth": {
+      "bandwidth_limited_naturally": true
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/clean/clean_08_natural_bandwidth_limited.wav"
+  },
+  {
+    "file_id": "clean_09_natural_bandwidth_limited.wav",
+    "category": "clean",
+    "defect_type": "none",
+    "is_defective": false,
+    "ground_truth": {
+      "bandwidth_limited_naturally": true
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/clean/clean_09_natural_bandwidth_limited.wav"
+  },
+  {
+    "file_id": "bandwidth_cutoff_8000hz.wav",
+    "category": "bandwidth",
+    "defect_type": "spectral_cutoff_fake_upsampling",
+    "is_defective": true,
+    "ground_truth": {
+      "cutoff_hz": 8000,
+      "target_fs": 48000
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/bandwidth/bandwidth_cutoff_8000hz.wav"
+  },
+  {
+    "file_id": "bandwidth_cutoff_11025hz.wav",
+    "category": "bandwidth",
+    "defect_type": "spectral_cutoff_fake_upsampling",
+    "is_defective": true,
+    "ground_truth": {
+      "cutoff_hz": 11025,
+      "target_fs": 48000
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/bandwidth/bandwidth_cutoff_11025hz.wav"
+  },
+  {
+    "file_id": "bandwidth_cutoff_12000hz.wav",
+    "category": "bandwidth",
+    "defect_type": "spectral_cutoff_fake_upsampling",
+    "is_defective": true,
+    "ground_truth": {
+      "cutoff_hz": 12000,
+      "target_fs": 48000
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/bandwidth/bandwidth_cutoff_12000hz.wav"
+  },
+  {
+    "file_id": "bandwidth_cutoff_15000hz.wav",
+    "category": "bandwidth",
+    "defect_type": "spectral_cutoff_fake_upsampling",
+    "is_defective": true,
+    "ground_truth": {
+      "cutoff_hz": 15000,
+      "target_fs": 48000
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/bandwidth/bandwidth_cutoff_15000hz.wav"
+  },
+  {
+    "file_id": "bandwidth_cutoff_16000hz.wav",
+    "category": "bandwidth",
+    "defect_type": "spectral_cutoff_fake_upsampling",
+    "is_defective": true,
+    "ground_truth": {
+      "cutoff_hz": 16000,
+      "target_fs": 48000
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/bandwidth/bandwidth_cutoff_16000hz.wav"
+  },
+  {
+    "file_id": "bandwidth_cutoff_18000hz.wav",
+    "category": "bandwidth",
+    "defect_type": "spectral_cutoff_fake_upsampling",
+    "is_defective": true,
+    "ground_truth": {
+      "cutoff_hz": 18000,
+      "target_fs": 48000
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/bandwidth/bandwidth_cutoff_18000hz.wav"
+  },
+  {
+    "file_id": "bandwidth_cutoff_20000hz.wav",
+    "category": "bandwidth",
+    "defect_type": "spectral_cutoff_fake_upsampling",
+    "is_defective": true,
+    "ground_truth": {
+      "cutoff_hz": 20000,
+      "target_fs": 48000
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/bandwidth/bandwidth_cutoff_20000hz.wav"
+  },
+  {
+    "file_id": "phase_delay_0.08ms.wav",
+    "category": "phase",
+    "defect_type": "inter_channel_phase_delay",
+    "is_defective": true,
+    "ground_truth": {
+      "delay_ms": 0.08,
+      "delay_samples": 4,
+      "polarity_inverted": false
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/phase/phase_delay_0.08ms.wav"
+  },
+  {
+    "file_id": "phase_delay_0.25ms.wav",
+    "category": "phase",
+    "defect_type": "inter_channel_phase_delay",
+    "is_defective": true,
+    "ground_truth": {
+      "delay_ms": 0.25,
+      "delay_samples": 12,
+      "polarity_inverted": false
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/phase/phase_delay_0.25ms.wav"
+  },
+  {
+    "file_id": "phase_delay_0.50ms.wav",
+    "category": "phase",
+    "defect_type": "inter_channel_phase_delay",
+    "is_defective": true,
+    "ground_truth": {
+      "delay_ms": 0.5,
+      "delay_samples": 24,
+      "polarity_inverted": false
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/phase/phase_delay_0.50ms.wav"
+  },
+  {
+    "file_id": "phase_delay_1.00ms.wav",
+    "category": "phase",
+    "defect_type": "inter_channel_phase_delay",
+    "is_defective": true,
+    "ground_truth": {
+      "delay_ms": 1.0,
+      "delay_samples": 48,
+      "polarity_inverted": false
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/phase/phase_delay_1.00ms.wav"
+  },
+  {
+    "file_id": "phase_delay_2.00ms.wav",
+    "category": "phase",
+    "defect_type": "inter_channel_phase_delay",
+    "is_defective": true,
+    "ground_truth": {
+      "delay_ms": 2.0,
+      "delay_samples": 96,
+      "polarity_inverted": false
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/phase/phase_delay_2.00ms.wav"
+  },
+  {
+    "file_id": "phase_polarity_inverted.wav",
+    "category": "phase",
+    "defect_type": "polarity_inversion",
+    "is_defective": true,
+    "ground_truth": {
+      "delay_ms": 0.0,
+      "polarity_inverted": true
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/phase/phase_polarity_inverted.wav"
+  },
+  {
+    "file_id": "drift_test_15.0ppm.wav",
+    "category": "drift",
+    "defect_type": "clock_drift",
+    "is_defective": true,
+    "ground_truth": {
+      "drift_ppm": 15.0,
+      "reference_file": "drift_ref_15.0ppm.wav"
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/drift/drift_test_15.0ppm.wav"
+  },
+  {
+    "file_id": "drift_test_35.0ppm.wav",
+    "category": "drift",
+    "defect_type": "clock_drift",
+    "is_defective": true,
+    "ground_truth": {
+      "drift_ppm": 35.0,
+      "reference_file": "drift_ref_35.0ppm.wav"
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/drift/drift_test_35.0ppm.wav"
+  },
+  {
+    "file_id": "drift_test_60.0ppm.wav",
+    "category": "drift",
+    "defect_type": "clock_drift",
+    "is_defective": true,
+    "ground_truth": {
+      "drift_ppm": 60.0,
+      "reference_file": "drift_ref_60.0ppm.wav"
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/drift/drift_test_60.0ppm.wav"
+  },
+  {
+    "file_id": "drift_test_100.0ppm.wav",
+    "category": "drift",
+    "defect_type": "clock_drift",
+    "is_defective": true,
+    "ground_truth": {
+      "drift_ppm": 100.0,
+      "reference_file": "drift_ref_100.0ppm.wav"
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/drift/drift_test_100.0ppm.wav"
+  },
+  {
+    "file_id": "waveform_hard_clipped.wav",
+    "category": "waveform",
+    "defect_type": "clipping",
+    "is_defective": true,
+    "ground_truth": {
+      "clip_threshold": 0.75
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/waveform/waveform_hard_clipped.wav"
+  },
+  {
+    "file_id": "waveform_dc_offset_12pct.wav",
+    "category": "waveform",
+    "defect_type": "dc_offset",
+    "is_defective": true,
+    "ground_truth": {
+      "dc_offset": 0.12
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/waveform/waveform_dc_offset_12pct.wav"
+  },
+  {
+    "file_id": "bleed_stem_drums_in_vocal_36db.wav",
+    "category": "bleed",
+    "defect_type": "inter_stem_bleed",
+    "is_defective": true,
+    "ground_truth": {
+      "bleed_db": -36.0,
+      "bleed_gain": 0.015848931924611134,
+      "interferer": "drums"
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/bleed/bleed_stem_drums_in_vocal_36db.wav"
+  },
+  {
+    "file_id": "bleed_stem_drums_in_vocal_24db.wav",
+    "category": "bleed",
+    "defect_type": "inter_stem_bleed",
+    "is_defective": true,
+    "ground_truth": {
+      "bleed_db": -24.0,
+      "bleed_gain": 0.06309573444801933,
+      "interferer": "drums"
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/bleed/bleed_stem_drums_in_vocal_24db.wav"
+  },
+  {
+    "file_id": "bleed_stem_drums_in_vocal_14db.wav",
+    "category": "bleed",
+    "defect_type": "inter_stem_bleed",
+    "is_defective": true,
+    "ground_truth": {
+      "bleed_db": -14.0,
+      "bleed_gain": 0.19952623149688797,
+      "interferer": "drums"
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/bleed/bleed_stem_drums_in_vocal_14db.wav"
+  },
+  {
+    "file_id": "bleed_stem_drums_in_vocal_6db.wav",
+    "category": "bleed",
+    "defect_type": "inter_stem_bleed",
+    "is_defective": true,
+    "ground_truth": {
+      "bleed_db": -6.0,
+      "bleed_gain": 0.5011872336272722,
+      "interferer": "drums"
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/bleed/bleed_stem_drums_in_vocal_6db.wav"
+  },
+  {
+    "file_id": "split_contamination_set",
+    "category": "splits",
+    "defect_type": "split_leakage",
+    "is_defective": true,
+    "ground_truth": {
+      "leaked_files": [
+        "test_leaked_exact_train00.wav",
+        "test_leaked_modified_train01.wav"
+      ],
+      "clean_test_files": 3
+    },
+    "path": "/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research/corpus/splits"
+  }
+]
