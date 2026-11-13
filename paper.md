@@ -7,6 +7,7 @@ tags:
   - dataset integrity
   - spectral forensics
   - data leakage
+  - deep learning
   - music information retrieval
 authors:
   - name: Boobalan Arjunan
@@ -20,25 +21,27 @@ bibliography: paper.bib
 
 # Summary
 
-Deep learning models for speech recognition, audio source separation, acoustic classification, and generative sound synthesis depend heavily on the integrity of large-scale training corpora [@panayotov2015librispeech; @rafii2017musdb18]. However, raw audio crawled from public web repositories or legacy archives frequently contains insidious defects: brickwall frequency cutoffs disguised by artificial upsampling, inter-channel phase cancellation, clock drift across asynchronous recording interfaces, inter-stem acoustic bleed in multi-track recordings, and silent train/validation/test contamination [@defossez2019demucs].
+Deep learning architectures for audio—spanning neural audio codecs, diffusion models, automatic speech recognition (ASR), and generative sound synthesis—depend fundamentally on the integrity of large-scale training corpora [@panayotov2015librispeech; @rafii2017musdb18]. When engineering pipelines scrape millions of audio hours from public web repositories, YouTube, or podcast dumps, the resulting datasets are frequently contaminated by insidious, silent defects: brickwall frequency cutoffs disguised by artificial upsampling, inter-channel phase cancellation, clock drift across asynchronous interfaces, inter-stem acoustic bleed in multi-track recordings, and silent train/validation/test contamination [@defossez2019demucs].
 
-The **ComposerMind AudioIntegrity Suite** is an open-source, modular Python framework engineered to audit, quantify, and remediate these audio defects before model training. Built upon zero-bloat CPU primitives (`numpy`, `scipy`, and `soundfile`), the suite provides 10 interoperable command-line tools and Python modules that evaluate acoustic corpora across three key lifecycle dimensions: pre-training signal forensics, dataset split contamination, and post-model separation diagnostics.
+The **ComposerMind AudioIntegrity Suite** is an open-source, modular Python framework engineered for machine learning practitioners and signal processing engineers to audit, quantify, and quarantine defective audio before model training. Built upon zero-bloat CPU primitives (`numpy`, `scipy`, and `soundfile`), the suite provides 10 interoperable command-line tools and Python modules that evaluate acoustic corpora across three lifecycle stages: pre-training signal forensics, dataset partition contamination, and post-model separation diagnostics.
 
 # Statement of Need
 
-Standard data-loading pipelines in machine learning frameworks typically verify only basic file formatting, such as readability and container headers. Traditional audio quality metrics (e.g., Signal-to-Noise Ratio, PESQ) require an aligned reference recording or focus narrowly on human perceptual listening quality rather than machine-learning dataset hygiene. Consequently, critical dataset flaws remain undetected:
-1. **Fake Upsampling and Codec Artifacts:** Audio upsampled from 16 kHz or 22.05 kHz to 48 kHz produces severe spectral "cliffs" where no high-frequency information exists. Models trained on these files learn to hallucinate unnatural high-frequency noise.
-2. **Phase Cancellation and Haas Delay:** Inadvertent polarity inversions or microsecond inter-channel delays cause devastating phase cancellation when downmixed to mono during feature extraction.
-3. **Split Contamination:** Re-encoded, trimmed, or gain-shifted copies of training recordings frequently leak into test sets, artificially inflating benchmark performance.
+Standard data loaders in modern deep learning frameworks (e.g., PyTorch, TensorFlow) verify only container formatting and file readability. Traditional speech quality metrics (e.g., PESQ, POLQA) require time-aligned clean reference signals or measure human conversational listening preference rather than machine-learning dataset hygiene. Consequently, four critical dataset flaws routinely pass into multi-GPU training clusters:
 
-Existing audio analysis toolkits, such as `librosa` [@mcfee2015librosa], offer general-purpose DSP algorithms but lack automated decision boundaries, defect pass/fail criteria, and machine-readable audit reports. The **AudioIntegrity Suite** fills this gap by providing purpose-built diagnostic detectors with quantified thresholds and automated quarantine mechanisms.
+1. **Fake 48 kHz Upsampling and Codec Artifacts:** Audio crawled from streaming sources is frequently transcoded or upsampled from low-bitrate MP3/AAC streams to 48 kHz uncompressed containers. While headers report 48 kHz, high-frequency energy abruptly cuts off at 11–16 kHz. Generative audio and diffusion models trained on such files learn to hallucinate harsh digital hiss and unnatural high-frequency artifacts.
+2. **Phase Cancellation on Mono Downmix:** Multi-channel speech or stereo music often contains accidental polarity inversions or microsecond Haas delays. When PyTorch data loaders downmix stereo inputs to mono for feature extraction (e.g., mel-spectrograms), destructive acoustic interference erases speech formants and harmonic energy.
+3. **Sub-Segment Split Contamination:** Minor alterations—such as 50ms temporal trimming, gain adjustments, or re-encoding—allow training files to contaminate validation and test partitions. Models achieve deceptively low validation loss, masking catastrophic generalization failures in production.
+4. **Wasted Compute Budgets:** Incurring thousands of dollars in cloud GPU compute to train models on poisoned acoustic corpora results in degraded checkpoints and redundant training cycles.
+
+Existing audio toolkits, such as `librosa` [@mcfee2015librosa], provide general-purpose mathematical primitives but lack automated decision boundaries, defect pass/fail criteria, and machine-readable quarantine mechanisms. The **AudioIntegrity Suite** bridges this gap by providing purpose-built diagnostic detectors with statistically calibrated thresholds and automated quarantine manifests.
 
 # State of the Field
 
-General-purpose audio libraries such as `librosa` [@mcfee2015librosa] and `torchaudio` provide foundational DSP primitives (STFT, chromagrams, MFCCs) but require researchers to manually invent ad-hoc heuristics, thresholds, and reporting pipelines. Conversely, traditional perceptual evaluation tools (e.g., PESQ, POLQA, ViSQOL) measure telecommunication speech quality against reference signals, making them inapplicable to reference-free, large-scale web audio crawls.
+General-purpose audio libraries such as `librosa` [@mcfee2015librosa] and `torchaudio` provide foundational DSP primitives (STFT, chromagrams, MFCCs) but require ML engineers to manually construct ad-hoc heuristics, thresholds, and reporting pipelines. Conversely, traditional perceptual evaluation tools (e.g., PESQ, POLQA, ViSQOL) measure telecommunication speech quality against reference signals, making them inapplicable to reference-free, large-scale web audio crawls.
 
 The **AudioIntegrity Suite** uniquely addresses audio dataset engineering by providing:
-1. **Calibrated Decision Boundaries:** Statistically tuned detector thresholds that differentiate acoustic roll-offs from artificial codec cliffs with zero false positives.
+1. **Calibrated Decision Boundaries:** Statistically tuned detector thresholds that differentiate acoustic roll-offs from artificial codec cliffs with zero false alarms.
 2. **Cross-Partition Security:** Acoustic fingerprinting tailored specifically to identify train/validation/test contamination across re-encoded or trimmed segments.
 3. **Autonomous Quarantining:** Production-grade CLI tools and Python hooks that output machine-readable JSON/CSV audit reports for automated data filtering in PyTorch and Hugging Face data loaders.
 
@@ -73,34 +76,42 @@ Crucially, `bandcheck` successfully differentiated naturally bandwidth-limited a
 
 # Installation and Usage
 
-All tools are independently installable via `pip` or executable as unified CLI utilities:
+All tools are installable individually via `pip` or executable as unified CLI utilities:
 
 ```bash
-# Install individual tools
+# Install individual tools from PyPI
 pip install bandcheck phasecheck splitsafe stemcheck wavewash
 
-# Run automated spectral forensics on an audio folder
-bandcheck audit ./my_dataset/
+# Audit a scraped audio folder before kicking off model training
+bandcheck audit ./scraped_audio/ --output-manifest audit_manifest.json
 
-# Verify train/test splits for leakage
-splitsafe check ./train ./test --manifest manifest.csv
+# Ensure zero train/test leakage before spinning up multi-GPU clusters
+splitsafe check ./train ./test --manifest leakage_audit.csv
 ```
 
-Programmatic Python usage enables direct integration into data-loading pipelines:
+Programmatic integration directly into PyTorch data-loading pipelines enables on-the-fly dataset sanitization:
 
 ```python
 from pathlib import Path
 import bandcheck.check
 import phasecheck.check
 
-# Fast file audit
-verdict = bandcheck.check.check_file(Path("audio_sample.wav"))
-if verdict.status in ["FAKE", "LIMITED"]:
-    print(f"Defect detected: Cutoff at {verdict.cutoff_hz:.1f} Hz")
+def sanitize_sample(audio_path: Path) -> bool:
+    # 1. Reject fake-upsampled or lossy-compressed audio
+    band_verdict = bandcheck.check.check_file(audio_path)
+    if band_verdict.status in ["FAKE", "LIMITED"]:
+        return False  # Discard files causing generative models to hallucinate noise
+        
+    # 2. Reject phase-inverted audio before mono downmixing
+    phase_verdict = phasecheck.check.check_file(audio_path)
+    if phase_verdict.status == "INVERTED":
+        return False  # Prevent cancellation during mono feature extraction
+        
+    return True
 ```
 
 # Acknowledgements
 
-The author thanks ComposerMind Labs for supporting the open-source engineering and empirical validation of this research toolkit.
+The author thanks ComposerMind Labs for supporting the open-source engineering and empirical validation of this dataset curation toolkit.
 
 # References
