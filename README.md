@@ -1,4 +1,4 @@
-# ComposerMind AudioIntegrity Suite: Audio AI & ML Dataset Curation Framework
+# ComposerMind AudioIntegrity Suite: Audio ML Dataset Curation Framework
 
 [![PyPI Version](https://img.shields.io/badge/pypi-10%20packages-blue.svg)](https://pypi.org/)
 [![Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://www.python.org/)
@@ -26,20 +26,42 @@ The **ComposerMind AudioIntegrity Suite** solves this by providing 10 specialize
 
 ---
 
+## 3-Stage Audio ML Lifecycle Framework
+
+The suite organizes 10 specialized tools across three operational stages of dataset curation:
+
+### Stage 1: Pre-Ingestion Signal Hygiene & Forensics
+* **`bandcheck` (Spectral Forensics):** Detects brickwall lossy compression cutoffs and fake 48 kHz upsampling via Modified Discrete Cosine Transform (MDCT) frame statistics. *ML Usage:* Automatically drops or flags web-scraped audio to prevent generative and diffusion models from hallucinating high-frequency codec hiss.
+* **`phasecheck` (Spatial & Phase Integrity):** Quantifies inter-channel cross-correlation ($\rho$), sub-sample Haas delay, and mono downmix cancellation loss in dB. *ML Usage:* Quarantines polarity-inverted stereo files before feature extraction to prevent destructive phase cancellation when PyTorch models downmix to mono.
+* **`wavewash` (Waveform Quality Control):** Scans for hard clipping, digital saturation, DC offset bias, and dynamic SNR. *ML Usage:* Pre-conditions raw waveforms with automated DC-bias centering and headroom normalization before spectrogram computation.
+* **`driftcheck` (Clock Drift Synchronization):** Tracks asynchronous sample-clock drift rates in parts-per-million ($\text{ppm}$) across independent recording interfaces. *ML Usage:* Aligns multi-microphone speech corpora before multi-channel acoustic modeling.
+
+### Stage 2: Dataset Partition Security & Synthetic Ground Truth
+* **`splitsafe` (Contamination Firewall):** Generates robust acoustic fingerprints to detect cross-partition duplicates across training, validation, and testing directories. *ML Usage:* Identifies bit-exact duplicates, trimmed excerpts, and re-encoded copies across splits, ensuring reported test accuracy reflects true generalization.
+* **`mixforge` (Benchmark Synthesis Engine):** Mixes multi-track stems with calibrated inter-channel acoustic bleed and simulated Room Impulse Responses (RIRs). *ML Usage:* Generates controlled, ground-truth audio mixtures to benchmark source separation and speech enhancement algorithms.
+
+### Stage 3: Annotation Validation & Model Diagnostics
+* **`tempocheck` (Rhythmic Annotation Audit):** Verifies dynamic BPM trajectories and downbeat grid alignment. *ML Usage:* Audits music AI dataset labels, flagging half-time/double-time annotation errors in training manifests.
+* **`tonicfind` (Harmonic Key Validation):** Computes 12-dimensional chromagram correlations against Temperley/Krumhansl tonal profiles. *ML Usage:* Validates musical key and tonality metadata for conditional music generation models.
+* **`turnscope` (Conversational Speech Forensics):** Measures Voice Activity Detection (VAD) boundaries, speaker overlap duration, and turn-taking latency. *ML Usage:* Audits diarization datasets and benchmarks conversational speech synthesis models.
+* **`stemcheck` (Separation Bleed Diagnostics):** Calculates inter-stem Wiener soft-mask bleed and harmonic-percussive separation (HPSS) leakage. *ML Usage:* Evaluates Demucs/Spleeter source separation checkpoints by measuring residual acoustic bleed across separated stems.
+
+---
+
 ## Master Package Registry (The 10 Tools)
 
-| # | Package Name | Command-Line Tool | Core Audio ML & Dataset Curation Capability | Status |
-| :---: | :--- | :--- | :--- | :---: |
-| 01 | [`bandcheck`](https://pypi.org/project/bandcheck/) | `bandcheck` | Detects lossy codec cutoffs & fake upsampling before generative model training | ✅ Live on PyPI |
-| 02 | [`phasecheck`](https://pypi.org/project/phasecheck/) | `phasecheck` | Sub-sample phase coherence & mono downmix cancellation loss detection | ✅ Live on PyPI |
-| 03 | [`splitsafe`](https://pypi.org/project/splitsafe/) | `splitsafe` | Acoustic fingerprinting firewall detecting train/val/test data leakage | ✅ Live on PyPI |
-| 04 | [`wavewash`](https://pypi.org/project/wavewash/) | `wavewash` | Waveform hygiene: detects clipping, repairs DC offset, audits SNR | ✅ Live on PyPI |
-| 05 | [`stemcheck`](https://pypi.org/project/stemcheck/) | `stemcheck` | Evaluates music source separation models by measuring Wiener soft-mask bleed | ✅ Live on PyPI |
-| 06 | [`driftcheck-audio`](https://pypi.org/project/driftcheck-audio/) | `driftcheck` | Asynchronous sample-rate clock drift estimator for multi-mic recording setups | ✅ Live on PyPI |
-| 07 | [`tempocheck`](https://pypi.org/project/tempocheck/) | `tempocheck` | Audits rhythmic dataset labels, downbeat grids, and dynamic BPM trajectories | ✅ Live on PyPI |
-| 08 | [`tonicfind`](https://pypi.org/project/tonicfind/) | `tonicfind` | Chroma correlation & MIREX-scored musical key / tonic label integrity checker | ✅ Live on PyPI |
-| 09 | [`turnscope`](https://pypi.org/project/turnscope/) | `turnscope` | Audits conversational speech datasets for talk-over overlap, latency, and VAD | ✅ Live on PyPI |
-| 10 | [`mixforge-audio`](https://pypi.org/project/mixforge-audio/) | `mixforge` | Benchmark multi-track mixture generator with calibrated bleed and RIR acoustics | ✅ Live on PyPI |
+| # | Package Name | Command-Line Tool | ML Pipeline Stage | Detection Target & Method | Status |
+| :---: | :--- | :--- | :--- | :--- | :---: |
+| 01 | [`bandcheck`](https://pypi.org/project/bandcheck/) | `bandcheck` | Pre-Ingestion | Lossy cutoffs & fake upsampling (MDCT) | ✅ Live on PyPI |
+| 02 | [`phasecheck`](https://pypi.org/project/phasecheck/) | `phasecheck` | Pre-Ingestion | Polarity inversion & Haas skew (Correlation) | ✅ Live on PyPI |
+| 03 | [`wavewash`](https://pypi.org/project/wavewash/) | `wavewash` | Pre-Ingestion | Peak clipping, DC bias repair, dynamic SNR | ✅ Live on PyPI |
+| 04 | [`driftcheck-audio`](https://pypi.org/project/driftcheck-audio/) | `driftcheck` | Pre-Ingestion | Asynchronous sample-rate clock drift ($\text{ppm}$) | ✅ Live on PyPI |
+| 05 | [`splitsafe`](https://pypi.org/project/splitsafe/) | `splitsafe` | Partition Security | Train/Val/Test contamination & leakage | ✅ Live on PyPI |
+| 06 | [`mixforge-audio`](https://pypi.org/project/mixforge-audio/) | `mixforge` | Benchmark Synthesis | Calibrated multi-track mixing & RIR acoustics | ✅ Live on PyPI |
+| 07 | [`tempocheck`](https://pypi.org/project/tempocheck/) | `tempocheck` | Annotation Audit | Dynamic BPM trajectories & downbeat grids | ✅ Live on PyPI |
+| 08 | [`tonicfind`](https://pypi.org/project/tonicfind/) | `tonicfind` | Annotation Audit | Chroma correlation & harmonic key profiles | ✅ Live on PyPI |
+| 09 | [`turnscope`](https://pypi.org/project/turnscope/) | `turnscope` | Model Evaluation | Conversational speech overlap, talk-over & latency | ✅ Live on PyPI |
+| 10 | [`stemcheck`](https://pypi.org/project/stemcheck/) | `stemcheck` | Model Evaluation | Wiener soft-mask source separation bleed | ✅ Live on PyPI |
 
 ---
 
@@ -87,13 +109,16 @@ class CuratedAudioDataset(Dataset):
 Run automated dataset hygiene checks in your training pipeline or GitHub Actions before launching GPU clusters:
 
 ```bash
-# Audit a 100,000-file scraped dataset for fake upsampling
+# 1. Audit a 100,000-file scraped dataset for fake upsampling
 bandcheck audit ./scraped_audio/ --output-manifest audit_report.json
 
-# Ensure zero train/test leakage before spinning up a multi-GPU training run
+# 2. Ensure zero train/test leakage before spinning up a multi-GPU training run
 splitsafe check ./train_set ./test_set --threshold 0.80 --manifest leakage_audit.csv
 
-# Audit stereo datasets for phase cancellation issues
+# 3. Clean waveform anomalies (DC bias, clipping) across audio files
+wavewash clean ./raw_audio/ --output-dir ./cleaned_audio/
+
+# 4. Audit stereo datasets for phase cancellation issues
 phasecheck audit ./stereo_stems/ --quarantine ./corrupted_phase/
 ```
 
@@ -112,7 +137,7 @@ turnscope audit ./conversational_eval/
 
 ## Empirical Benchmark Verification
 
-The suite was rigorously evaluated against a calibrated 48 kHz synthetic corpus (34 entries) containing controlled mathematical defects alongside clean acoustic controls:
+While all 10 packages maintain independent automated test suites with over **300 passing unit tests**, the core pre-training forensics detectors were evaluated against a calibrated 48 kHz synthetic corpus (34 entries) containing controlled mathematical defects alongside clean acoustic controls:
 
 | Detector | Injected Defect Target | Precision | Recall | Parameter Estimation Error | Clean Negative False Alarms |
 | :--- | :--- | :---: | :---: | :---: | :---: |
@@ -131,6 +156,9 @@ The suite was rigorously evaluated against a calibrated 48 kHz synthetic corpus 
 
 Clone this repository and run the synthetic corpus evaluation:
 ```bash
+git clone https://github.com/BoobalanArjunan/ComposerMind-AudioIntegrity-Suite.git
+cd ComposerMind-AudioIntegrity-Suite
+
 # 1. Generate synthetic ground-truth corpus
 python generators/generate_synthetic_corpus.py
 
