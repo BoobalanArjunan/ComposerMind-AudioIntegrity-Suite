@@ -1,5 +1,5 @@
 ---
-title: 'ComposerMind AudioIntegrity Suite: A Modular Python Framework for Audio ML Dataset Curation, Spectral Forensics, and Leakage Detection'
+title: 'OpenSource AudioIntegrity Suite: A Modular Python Framework for Audio ML Dataset Curation, Spectral Forensics, and Leakage Detection'
 tags:
   - Python
   - audio machine learning
@@ -13,7 +13,7 @@ authors:
   - name: Boobalan Arjunan
     affiliation: 1
 affiliations:
-  - name: ComposerMind Labs, Chennai, India
+  - name: , Chennai, India
     index: 1
 date: 13 November 2026
 bibliography: paper.bib
@@ -23,7 +23,7 @@ bibliography: paper.bib
 
 Deep learning architectures for audio—spanning neural audio codecs, diffusion models, automatic speech recognition (ASR), and generative sound synthesis—depend fundamentally on the integrity of large-scale training corpora [@panayotov2015librispeech; @rafii2017musdb18]. When engineering pipelines scrape millions of audio hours from public web repositories, YouTube, or podcast dumps, the resulting datasets are frequently contaminated by insidious, silent defects: brickwall frequency cutoffs disguised by artificial upsampling, inter-channel phase cancellation, clock drift across asynchronous interfaces, inter-stem acoustic bleed in multi-track recordings, and silent train/validation/test contamination [@defossez2019demucs].
 
-The **ComposerMind AudioIntegrity Suite** is an open-source, modular Python framework engineered for machine learning practitioners and signal processing engineers to audit, quantify, and quarantine defective audio before model training. Built upon zero-bloat CPU primitives (`numpy`, `scipy`, and `soundfile`), the suite provides 7 interoperable command-line tools and Python modules that evaluate acoustic corpora across three pre-training dimensions: signal forensics, dataset partition security, and acoustic annotation integrity.
+The **OpenSource AudioIntegrity Suite** is an open-source, modular Python framework engineered for machine learning practitioners and signal processing engineers to audit, quantify, and quarantine defective audio before model training. Built upon zero-bloat CPU primitives (`numpy`, `scipy`, and `soundfile`), the suite provides 7 interoperable command-line tools and Python modules that evaluate acoustic corpora across three pre-training dimensions: signal forensics, dataset partition security, and acoustic annotation integrity.
 
 # Statement of Need
 
@@ -129,6 +129,6 @@ def sanitize_audio_sample(audio_path: Path) -> bool:
 
 # Acknowledgements
 
-The author thanks ComposerMind Labs for supporting the open-source engineering and empirical validation of this dataset curation toolkit.
+The author thanks  for supporting the open-source engineering and empirical validation of this dataset curation toolkit.
 
 # References

@@ -1,4 +1,4 @@
-# ComposerMind AudioIntegrity Suite: Audio ML Dataset Curation Framework
+# OpenSource AudioIntegrity Suite: Audio ML Dataset Curation Framework
 
 [![PyPI Version](https://img.shields.io/badge/pypi-7%20packages-blue.svg)](https://pypi.org/)
 [![Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://www.python.org/)
@@ -7,7 +7,7 @@
 
 > **Production-grade Python tools and CLI utilities for Audio AI, Deep Learning, and Speech ML engineers to audit, curate, and quarantine training datasets before model training.**
 
-Developed and maintained by **Boobalan Arjunan** at **ComposerMind Labs, Chennai, India**.
+Developed and maintained by **Boobalan Arjunan** at **, Chennai, India**.
 
 ---
 
@@ -22,7 +22,7 @@ However, raw uncurated acoustic corpora contain silent, catastrophic defects tha
 3. **Catastrophic Cross-Split Data Leakage:** Minor edits (gain adjustments, 50ms trims, MP3 re-encoding) allow training files to contaminate validation and test partitions. Models appear to achieve world-class test loss, **masking severe real-world generalization failure**.
 4. **Wasted GPU Compute:** Launching multi-node GPU training clusters costing thousands of dollars on poisoned datasets results in wasted compute budgets and degraded model checkpoints.
 
-The **ComposerMind AudioIntegrity Suite** solves this by providing 7 specialized, modular Python tools built on zero-bloat CPU primitives (`numpy`, `scipy`, `soundfile`) that act as a pre-training quarantine firewall.
+The **OpenSource AudioIntegrity Suite** solves this by providing 7 specialized, modular Python tools built on zero-bloat CPU primitives (`numpy`, `scipy`, `soundfile`) that act as a pre-training quarantine firewall.
 
 ---
 
@@ -139,8 +139,8 @@ While all 7 packages maintain independent automated test suites with over **200 
 
 Clone this repository and run the synthetic corpus evaluation:
 ```bash
-git clone https://github.com/BoobalanArjunan/ComposerMind-AudioIntegrity-Suite.git
-cd ComposerMind-AudioIntegrity-Suite
+git clone https://github.com/BoobalanArjunan/Opensource-AudioIntegrity-Suite.git
+cd Opensource-AudioIntegrity-Suite
 
 # 1. Generate synthetic ground-truth corpus
 python generators/generate_synthetic_corpus.py
@@ -158,7 +158,7 @@ If you use this suite or its components in your machine learning workflows or re
 
 ```bibtex
 @article{arjunan2026audiointegrity,
-  title={{ComposerMind AudioIntegrity Suite: A Modular Python Framework for Audio ML Dataset Curation, Spectral Forensics, and Leakage Detection}},
+  title={{OpenSource AudioIntegrity Suite: A Modular Python Framework for Audio ML Dataset Curation, Spectral Forensics, and Leakage Detection}},
   author={Arjunan, Boobalan},
   journal={Journal of Open Source Software},
   year={2026},
@@ -170,4 +170,4 @@ If you use this suite or its components in your machine learning workflows or re
 
 ## License
 
-Released under the [MIT License](LICENSE). Copyright © 2026 Boobalan Arjunan, ComposerMind Labs.
+Released under the [MIT License](LICENSE).

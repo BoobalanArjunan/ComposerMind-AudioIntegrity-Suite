@@ -1,6 +1,6 @@
-# ComposerMind AudioIntegrity-10: Empirical Benchmark Evaluation Report
+# OpenSource AudioIntegrity-10: Empirical Benchmark Evaluation Report
 
-**Authors:** Boobalan Arjunan (ComposerMind Labs)  
+**Authors:** Boobalan Arjunan ()  
 **Date:** November 13, 2026  
 **Corpus:** Controlled Synthetic Ground-Truth Corpus (48 kHz, 34 entries)  
 
@@ -8,7 +8,7 @@
 
 ## 1. Executive Summary
 
-This report establishes the first empirical validation benchmark of the **ComposerMind AudioIntegrity-10 Suite**, testing detection accuracy, false-positive behavior, and parameter estimation error against mathematically known ground truth.
+This report establishes the first empirical validation benchmark of the **OpenSource AudioIntegrity-10 Suite**, testing detection accuracy, false-positive behavior, and parameter estimation error against mathematically known ground truth.
 
 | Tool | Detection Target | Precision | Recall | Estimation Error (MAE) | Clean Negative FP Rate |
 | :--- | :--- | :---: | :---: | :---: | :---: |

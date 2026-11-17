@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-ComposerMind AudioIntegrity-10: Automated Benchmark Evaluation Runner
+OpenSource AudioIntegrity-10: Automated Benchmark Evaluation Runner
 Evaluates all detectors on the controlled synthetic ground-truth corpus.
 Calculates: Precision, Recall, False-Positive Rate, and Parameter Estimation Errors.
 
-Authors: Boobalan Arjunan (ComposerMind Labs)
+Authors: Boobalan Arjunan ()
 """
 
 import os
@@ -31,7 +31,7 @@ import splitsafe
 import stemcheck.bleed
 import soundfile as sf
 
-BASE_DIR = Path("/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/ComposerMind-AudioIntegrity-Research")
+BASE_DIR = Path("/Users/mymac/Desktop/Global Taalent UK/10 Evidences/10 Pypi Tools/OpenSource-AudioIntegrity-Research")
 CORPUS_DIR = BASE_DIR / "corpus"
 MANIFEST_PATH = BASE_DIR / "results" / "ground_truth_manifest.json"
 REPORT_PATH = BASE_DIR / "results" / "BENCHMARK_EVALUATION_REPORT.md"
@@ -153,9 +153,9 @@ def main():
     print("="*60)
 
     # Generate Markdown Report
-    report_content = f"""# ComposerMind AudioIntegrity-10: Empirical Benchmark Evaluation Report
+    report_content = f"""# OpenSource AudioIntegrity-10: Empirical Benchmark Evaluation Report
 
-**Authors:** Boobalan Arjunan (ComposerMind Labs)  
+**Authors:** Boobalan Arjunan ()  
 **Date:** November 13, 2026  
 **Corpus:** Controlled Synthetic Ground-Truth Corpus (48 kHz, 34 entries)  
 
@@ -163,7 +163,7 @@ def main():
 
 ## 1. Executive Summary
 
-This report establishes the first empirical validation benchmark of the **ComposerMind AudioIntegrity-10 Suite**, testing detection accuracy, false-positive behavior, and parameter estimation error against mathematically known ground truth.
+This report establishes the first empirical validation benchmark of the **OpenSource AudioIntegrity-10 Suite**, testing detection accuracy, false-positive behavior, and parameter estimation error against mathematically known ground truth.
 
 | Tool | Detection Target | Precision | Recall | Estimation Error (MAE) | Clean Negative FP Rate |
 | :--- | :--- | :---: | :---: | :---: | :---: |

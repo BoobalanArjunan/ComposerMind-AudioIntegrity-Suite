@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-ComposerMind AudioIntegrity-10: Controlled Synthetic Ground-Truth Corpus Generator
+OpenSource AudioIntegrity-10: Controlled Synthetic Ground-Truth Corpus Generator
 Phase 1: Generating reproducible audio defects and clean controls with exact metadata.
 
-Authors: Boobalan Arjunan (ComposerMind Labs)
+Authors: Boobalan Arjunan ()
 """
 
 import os
@@ -68,7 +68,7 @@ def generate_clean_audio(seed=42, mode="broadband"):
 def main():
     ensure_dirs()
     manifest = []
-    print("Generating ComposerMind AudioIntegrity-10 Controlled Corpus...")
+    print("Generating OpenSource AudioIntegrity-10 Controlled Corpus...")
 
     # 1. CLEAN NEGATIVE CONTROLS
     for i in range(10):
